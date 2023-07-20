@@ -13,11 +13,12 @@ import asyncio
 from collections import deque
 import threading
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
-
+import transformers
 
 client = commands.Bot(command_prefix='!', intents=nextcord.Intents.all())
 # SG161222/Realistic_Vision_V2.0
 # SG161222/Realistic_Vision_V3.0_VAE
+transformers.utils.move_cache()
 scheduler = EulerDiscreteScheduler.from_pretrained("SG161222/Realistic_Vision_V3.0_VAE", subfolder="scheduler")
 pipe1 = StableDiffusionPipeline.from_pretrained("SG161222/Realistic_Vision_V3.0_VAE", torch_dtype=torch.float16)
 pipe1 = pipe1.to("cuda")
@@ -70,7 +71,9 @@ async def process_queue():
 async def get_type(prompt, channel_id):
     if channel_id == 1125823145299939338:
         text = f"RAW photo, subject, {prompt} (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3"
-    elif channel_id in [1125823077268336722, 1125823101503016980, 1125823123275649044]:
+    elif channel_id in [1125823077268336722, 1125823101503016980]:
+        text = prompt
+    elif channel_id == 1125823123275649044:
         text = f"{prompt} (high detailed), 8k uhd, soft lighting, high quality"
     elif channel_id in [1125823166191767653, 1125884252576301067]:
         text = f"RAW photo, {prompt} (high detailed), 8k uhd, dslr, soft lighting, high quality, realistic, nsfw, porn"
@@ -138,4 +141,4 @@ for file in os.listdir("./cogs"):
     if file.endswith(".py") and not file.startswith("_"):
         client.load_extension(f"cogs.{file[:-3]}")
 
-client.run('ENTFERNTv')
+client.run('ENTFERNT')
