@@ -144,4 +144,4 @@ for file in os.listdir("./cogs"):
     if file.endswith(".py") and not file.startswith("_"):
         client.load_extension(f"cogs.{file[:-3]}")
 
-client.run('ENTFERNT', reconnect=True, debug=True)
+client.run('ENTFERNT', reconnect=True)
