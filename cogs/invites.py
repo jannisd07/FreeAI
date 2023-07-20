@@ -55,5 +55,11 @@ class Invites(commands.Cog):
         except:
             print("could not DM this user")
 
+
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        channel = self.bot.get_channel(1125824948842274957)
+        await channel.send(f"{member.name} left FreeAI :(")
+
 def setup(bot):
     bot.add_cog(Invites(bot))
