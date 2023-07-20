@@ -46,9 +46,12 @@ async def on_message(message):
                         queue.append([message.author.id, message.content, "pipe1", message.channel.id, "premium"])
                 else:
                     if data[str(message.author.id)]["account_type"] == "basic":
-                        await message.channel.send(f"<@{message.author.id}> You don't have any credits left. Invite friends to FreeAI to get more credits.")
+                        await message.channel.send(f"<@{message.author.id}> You don't have any credits left. Invite friends to FreeAI to get more credits. Each invite will give you **3 image generation credits**")
                     else:
                         queue.append([message.author.id, message.content, "pipe1", message.channel.id, "premium"])
+    elif message.channel.id == 1126110884436127876:
+        await message.add_reaction("🏆")
+
 
 @tasks.loop(seconds=3)
 async def process_queue():
@@ -141,4 +144,4 @@ for file in os.listdir("./cogs"):
     if file.endswith(".py") and not file.startswith("_"):
         client.load_extension(f"cogs.{file[:-3]}")
 
-client.run('ENTFERNT')
+client.run('ENTFERNT', reconnect=True, debug=True)
