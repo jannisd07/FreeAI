@@ -12,7 +12,6 @@ import concurrent.futures
 import asyncio
 from collections import deque
 import threading
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 
 
@@ -139,4 +138,4 @@ for file in os.listdir("./cogs"):
     if file.endswith(".py") and not file.startswith("_"):
         client.load_extension(f"cogs.{file[:-3]}")
 
-client.run('ENTFERNT')
+client.run('ENTFERNTv')
