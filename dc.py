@@ -20,7 +20,7 @@ client = commands.Bot(command_prefix='!', intents=nextcord.Intents.all())
 # SG161222/Realistic_Vision_V3.0_VAE
 transformers.utils.move_cache()
 scheduler = EulerDiscreteScheduler.from_pretrained("SG161222/Realistic_Vision_V3.0_VAE", subfolder="scheduler")
-pipe1 = StableDiffusionPipeline.from_pretrained("SG161222/Realistic_Vision_V3.0_VAE", torch_dtype=torch.float16)
+pipe1 = StableDiffusionPipeline.from_pretrained("SG161222/Realistic_Vision_V2.0", torch_dtype=torch.float16)
 pipe1 = pipe1.to("cuda")
 
 queue = deque()
@@ -65,7 +65,7 @@ async def process_queue():
         files = [nextcord.File(generated_image, filename=f"FreeAI_{i+1}.png") for i, generated_image in enumerate(generated_images)]
         message = await channel.send(f"{member.mention}\n**{prompt}**", files=files)
         try:
-            await member.send(f"Your generated images are ready!\n**{prompt}**\n\nhttps://discord.com/channels/1125542724402167808/{channel.id}/{message.id}")
+            await member.send(f"**Version: V2**\nYour generated images are ready!\n**{prompt}**\n\nhttps://discord.com/channels/1125542724402167808/{channel.id}/{message.id}")
         except:
             print("Could not dm this user")
         queue.popleft()
