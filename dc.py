@@ -2,6 +2,8 @@ import nextcord
 from nextcord.ext import commands
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
 import torch
 from nextcord import Interaction, SlashOption, ChannelType
 from nextcord.abc import GuildChannel
@@ -144,4 +146,4 @@ for file in os.listdir("./cogs"):
     if file.endswith(".py") and not file.startswith("_"):
         client.load_extension(f"cogs.{file[:-3]}")
 
-client.run('ENTFERNT', reconnect=True)
+client.run(os.environ["DISCORD_BOT_TOKEN"], reconnect=True)

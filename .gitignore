@@ -1,0 +1,6 @@
+# Zugangsdaten nie einchecken
+.env
+
+# Python
+__pycache__/
+*.py[cod]
